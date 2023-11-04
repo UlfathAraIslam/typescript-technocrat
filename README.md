@@ -1,4 +1,4 @@
-# typescript-technocrat
+# <p style="color: blue">Be A TypeScript Technocrat: <p>
 
 ## Lackings in JavaScript
 
