@@ -150,5 +150,131 @@ const newArray: number[] = arr.map((elem: number): number => elem * elem);
 ```
 
 ### Spread operator, rest operator, destructuring
+### Rest operator:
+  The rest operator collects multiple elements into an array. It allows to work with an indefinite number of function arguments as an array, making it easier to handle     situations where the exact number of parameters is unknown or variable.
 
-Rest operator: The rest operator collects multiple elements into an array. It allows you to work with an indefinite number of function arguments as an array, making
+const greetFriends = (...friends: string[]) => {
+friends.forEach((friend: string)=> console.log(`Hi ${friends}`))
+};
+greetFriends('Abul', 'Kabul', 'Babul')
+
+
+
+### Spread operator:
+  The spread operator allows an iterable (like an array or a string) to be expanded into individual elements. It is commonly used to make copies of arrays or combine arrays. In TypeScript, it can also be used with objects.
+ 
+/const array1 = [1, 2, 3];
+ const array2 = [...array1, 4, 5, 6]; // creates a copy of array1 and adds elements
+ const obj1 = { name: 'John', age: 30 };
+ const obj2 = { ...obj1, id: 123 }; // creates a copy of obj1 and adds a new property
+
+
+### Object destructuring 
+// object destructuring
+const user = { name: 'John', age: 30, email: 'john@example.com' };
+const { name, age } = user; 
+console.log(name); // Output: John
+console.log(age); // Output: 30
+
+### Array destructuring
+
+const myFriends = ['alo', 'rano', 'fgggg','rose','rhuib'];
+
+
+const [,, bestFriend, ...rest ] = myFriends; 
+(,, -> skip 1st, 2nd element)
+
+
+
+### Type alias in typescript
+
+Type should be start with capital letter to understand easily.
+
+a type alias is a way to create a new name for a type. It allows you to create a custom name that represents a complex type definition. Type aliases are especially useful when you need to use the same complex type in multiple places in your code.
+
+Type aliases can also be used to represent more complex types, such as object types, union types, intersection types, and more.
+// type alias for function
+type Add = (num1: number, num2: number) => number
+
+
+const add: Add =(num1, num2) => num1 + num2;
+
+### Union and Intersection types
+
+### Union Type:
+A union type allows a value to be of more than one type. It is represented by the pipe symbol (|)
+type MyType = string | number;
+let value: MyType;
+value = "hello"; // Valid
+value = 123; // Valid
+// value = true; // Invalid, as it's not part of the union type
+
+
+### Intersection type: 
+  An intersection type allows you to combine multiple types into one, where the resulting type has all the features of each original type. It is represented by the ampersand symbol (&).
+type FirstType = { name: string };
+type SecondType = { age: number };
+type CombinedType = FirstType & SecondType;
+
+
+let obj: CombinedType = { name: "John", age: 30 };
+
+
+### ternery operator, optional chaining , nullish coalescing
+
+
+### ternery operator:
+const isAdult = age >=18 ? 'adult' : 'not adult'
+
+### nullish coalescing:
+To set a default value which depends on null or undefined, then we will use it.
+const isAthenticated = null;
+const result1 = isAthenticated ?? 'Guest';
+
+### optional chaining:
+You can use optional chaining when you want to access properties on objects that may be deeply nested
+const permanentaddress = user?.address?.permanentaddress ?? "No Permanent address";
+
+### Never type:
+The never type in TypeScript represents the type of values that never occur. It is used to indicate that something will never happen or that a function will never return (throw an error). The never type is a subtype of all types, meaning it can be assigned to any other type, but no other types can be assigned to it.
+// never
+const throwError = (msg: string): never=> {
+throw new Error(msg);
+}
+throwError('i got error')
+
+
+### Unknown type:
+The unknown type in TypeScript is for values that we may not know the type of at compile time(run time). It's different from the any type because it forces you to do some form of type checking before you can work with it safely.
+const getSpeedInMeterPerSecond = (value:unknown) => {
+if(typeof value === 'number'){
+const convertedSpeed = (value*1000) / 3600;
+console.log(`The speed is ${convertedSpeed}`);
+}
+else if(typeof value ==='string'){
+const [result, unit] = value.split(' ')
+const convertedSpeed = (parseFloat(result)*1000) / 3600;
+console.log(result);
+}
+else{
+console.log('wrong input');
+}
+}
+// getSpeedInMeterPerSecond(`1000 kmh^-1`)
+getSpeedInMeterPerSecond(null) //wrong input
+
+
+### Nullable type :
+It represents either the specified type or the value null. By default, most types in TypeScript are non-nullable, meaning they cannot be assigned the value null or undefined. However, you can explicitly declare a type to be nullable by using the union type in conjunction with null. 
+
+We can use it for searching bar.
+const searchName = (value: string | null) => {
+if (value) {
+console.log(('searching'));
+} else{
+console.log('there is nothing to search');
+}
+}
+searchName(null) // there is nothing to search
+
+
