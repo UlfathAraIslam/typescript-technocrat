@@ -1,6 +1,7 @@
 {
     // promise
 
+    // defining a type
     type Todo = {
         id: number;
         userId: number;
@@ -8,6 +9,7 @@
         completed: boolean
     }
 
+    // simulating fetching data asynchronously
     const getTodo = async(): Promise<Todo> => {
         const response = await fetch(
             'https://jsonplaceholder.typicode.com/todos/1'
@@ -18,12 +20,12 @@
         return data
         
      }
-
+    //  calling the asynchronous function
      getTodo()
 
     type Something = {something: string};
 
-    // simulate
+    // simulating a promise
     const createPromise = (): Promise<Something> => {
         return new Promise<Something>((resolve, reject)=> {
             const data : Something = {something: 'something'}
@@ -35,13 +37,13 @@
         })
     }
 
-    // calling create promise function
+    // using the promise in an async function
     const showData = async() : Promise<Something> => {
         const data: Something = await createPromise();
         console.log(data);
         return data
     };
-
+    // calling the async function
     showData()
 
     // 
