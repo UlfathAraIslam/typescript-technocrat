@@ -302,4 +302,102 @@ console.log('there is nothing to search');
 searchName(null) // there is nothing to search
 ```
 
+## Type Assertion and Type Narrowing
 
+Type assertion and type narrowing allow you to work with uncertain types:
+```
+let someValue: any = "this is a string";
+let strLength: number = (someValue as string).length;
+console.log(strLength); // Outputs: 16
+```
+## Type vs. Interface
+
+```
+type Person = {
+  name: string;
+  age: number;
+};
+```
+interface Person {
+  name: string;
+  age: number;
+}
+
+### generics
+
+```type GenericArray<T> = Array<T>;
+const myArray: GenericArray<number> = [1, 2, 4];
+
+type GenericTuple<X, Y> = [X, Y];
+const manush: GenericTuple<string, string> = ['Mr.X', 'Mr.Y'];
+
+interface Box<T> {
+  contents: T;
+}
+type NumberBox = Box<number>;
+const myNumberBox: NumberBox = { contents: 42 };
+```
+### Generic function
+```function getFirstElement<T>(arr: T[]): T | undefined {
+  return arr[0];
+}
+
+function concatenate<T, U>(tuple1: [T], tuple2: [U]): [T, U] {
+  return [tuple1[0], tuple2[0]];
+}
+```
+### Constraints
+
+```
+function getProperty<X, Y extends keyof X>(obj: X, key: Y) {
+  return obj[key];
+}
+```
+### Asynchronous TypeScript
+
+### Conditional Types
+```
+type x = a1 extends null ? true : false;
+type y = a1 extends null ? true : b1 extends undefined ? undefined : any;
+```
+### Mapped Types
+```
+type NameAge = Pick<Person, 'name' | 'age'>;
+type ContactInfo = Omit<Person, 'name' | 'age'>;
+type PersonRequired = Required<Person>;
+type PersonPartial = Partial<Person>;
+type PersonReadonly = Readonly<Person>;
+type MyObj = Record<string, string>;
+```
+### Utility Types
+Utility types simplify common type manipulations:
+
+Pick: Select specific properties from a type.
+Omit: Exclude specific properties from a type.
+Required: Make properties of a type mandatory.
+Partial: Make properties of a type optional.
+Readonly: Make a type's properties read-only.
+Record: Create a mapped type with keys and values.
+
+```
+//pick
+type NameAge = Pick<Person, 'name' | 'age'> 
+
+//Omit
+ype ContactInfo = Omit<Person, 'name' | 'age'>
+
+//Required
+type PersonRequired = Required<Person>
+
+//Partial
+type PersonPartial = Partial<Person>
+
+//Readonly
+type PersonReadonly = Readonly<Person> //can't change the property value;
+
+//Record
+type MyObj = Record<string,string>
+
+const EmptyObj : Record<string, unknown> = {} //when we know the property type but not the value type
+
+```
